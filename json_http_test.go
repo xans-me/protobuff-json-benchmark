@@ -1,4 +1,4 @@
-package benchmark
+package benchmarks
 
 import (
 	"bytes"
@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/xans-me/protobuff-json-benchmark/jsonHttp"
+	jsonHttp "github.com/xans-me/protobuff-json-benchmark/json-http"
 )
 
 func init() {
@@ -15,7 +15,7 @@ func init() {
 	time.Sleep(time.Second)
 }
 
-func BenchmarkHTTPJSON(b *testing.B) {
+func BenchmarkJSONHTTP(b *testing.B) {
 	client := &http.Client{}
 
 	for n := 0; n < b.N; n++ {
@@ -25,14 +25,14 @@ func BenchmarkHTTPJSON(b *testing.B) {
 
 func doPost(client *http.Client, b *testing.B) {
 	u := &jsonHttp.User{
-		Email:    "mulia.ichsan@amarbank.co.id",
-		Name:     "Mulia Ichsan",
-		Password: "inipassword00",
+		Email:    "foo@bar.com",
+		Name:     "Bench",
+		Password: "bench",
 	}
 	buf := new(bytes.Buffer)
 	json.NewEncoder(buf).Encode(u)
 
-	resp, err := client.Post("http://127.0.0.1:90001/", "application/json", buf)
+	resp, err := client.Post("http://127.0.0.1:60001/", "application/json", buf)
 	if err != nil {
 		b.Fatalf("http request failed: %v", err)
 	}

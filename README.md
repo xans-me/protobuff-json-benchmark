@@ -10,7 +10,7 @@ This repository contains 2 equal APIs: gRPC using Protobuf and JSON over HTTP. T
 
 Run benchmarks:
 ```
-GO111MODULE=on go test -bench=. -benchmem
+go test -bench=. -benchmem
 ```
 
 ### Results
@@ -18,10 +18,11 @@ GO111MODULE=on go test -bench=. -benchmem
 ```
 goos: darwin
 goarch: amd64
-BenchmarkGRPCProtobuf-8            10000            117649 ns/op            7686 B/op        154 allocs/op
-BenchmarkHTTPJSON-8                10000            105837 ns/op            8932 B/op        116 allocs/op
+pkg: github.com/xans-me/protobuff-json-benchmark
+BenchmarkJSONHTTP-4                 5391            232441 ns/op            9045 B/op        117 allocs/op
+BenchmarkProtobuffGRPC-4            5277            237833 ns/op            9401 B/op        190 allocs/op
 PASS
-
+ok      github.com/xans-me/protobuff-json-benchmark     6.567s
 ```
 
 They are almost the same, HTTP+JSON is a bit faster and has less allocs/op.
@@ -31,21 +32,16 @@ They are almost the same, HTTP+JSON is a bit faster and has less allocs/op.
 This will create an executable `benchmark-grpc-protobuf-vs-http-json.test` and the profile information will be stored in `grpcprotobuf.cpu` and `httpjson.cpu`:
 
 ```
-GO111MODULE=on go test -bench=BenchmarkGRPCProtobuf -cpuprofile=grpcprotobuf.cpu
-GO111MODULE=on go test -bench=BenchmarkHTTPJSON -cpuprofile=httpjson.cpu
+go test -bench=BenchmarkProtobuffGRPC -cpuprofile=protobuffgrpc.cpu
+go test -bench=BenchmarkJSONHTTP -cpuprofile=jsonhttp.cpu
 ```
 
 Check CPU usage per approach using:
 
 ```
-go tool pprof grpcprotobuf.cpu
-go tool pprof httpjson.cpu
+go tool pprof protobuffgrpc.cpu
+go tool pprof jsonhttp.cpu
 ```
 
 My results show that Protobuf consumes less ressources, around **30% less**.
 
-### gRPC definition
-
- - Install [Go](https://golang.org/dl/)
- - Install [Protocol Buffers](https://github.com/google/protobuf/releases)
- - Install protoc plugin: `go get github.com/golang/protobuf/proto github.com/golang/protobuf/protoc-gen-go`

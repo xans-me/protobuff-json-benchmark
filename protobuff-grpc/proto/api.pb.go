@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.25.0-devel
 // 	protoc        v3.14.0
-// source: grpcProtobuff/proto/api.proto
+// source: protobuff-grpc/proto/api.proto
 
 package proto
 
@@ -341,5 +341,5 @@ var _API_serviceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "grpcProtobuff/proto/api.proto",
+	Metadata: "protobuff-grpc/proto/api.proto",
 }

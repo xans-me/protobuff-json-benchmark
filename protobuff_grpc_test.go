@@ -1,22 +1,22 @@
-package benchmark
+package benchmarks
 
 import (
-	"context"
 	"testing"
 	"time"
 
-	"github.com/xans-me/protobuff-json-benchmark/grpcProtobuff"
-	"github.com/xans-me/protobuff-json-benchmark/grpcProtobuff/proto"
-	"google.golang.org/grpc"
+	pbGrpc "github.com/xans-me/protobuff-json-benchmark/protobuff-grpc"
+	"github.com/xans-me/protobuff-json-benchmark/protobuff-grpc/proto"
+	"golang.org/x/net/context"
+	g "google.golang.org/grpc"
 )
 
 func init() {
-	go grpcProtobuff.Start()
+	go pbGrpc.Start()
 	time.Sleep(time.Second)
 }
 
-func BenchmarkGRPCProtobuf(b *testing.B) {
-	conn, err := grpc.Dial("127.0.0.1:90000", grpc.WithInsecure())
+func BenchmarkProtobuffGRPC(b *testing.B) {
+	conn, err := g.Dial("127.0.0.1:60000", g.WithInsecure())
 	if err != nil {
 		b.Fatalf("grpc connection failed: %v", err)
 	}
@@ -30,9 +30,9 @@ func BenchmarkGRPCProtobuf(b *testing.B) {
 
 func doGRPC(client proto.APIClient, b *testing.B) {
 	resp, err := client.CreateUser(context.Background(), &proto.User{
-		Email:    "mulia.ichsan@amarbank.co.id",
-		Name:     "Mulia Ichsan",
-		Password: "inipassword00",
+		Email:    "foo@bar.com",
+		Name:     "Bench",
+		Password: "bench",
 	})
 
 	if err != nil {
