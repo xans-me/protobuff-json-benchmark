@@ -29,7 +29,7 @@ They are almost the same, HTTP+JSON is a bit faster and has less allocs/op.
 
 ### CPU usage comparison
 
-This will create an executable `benchmark-grpc-protobuf-vs-http-json.test` and the profile information will be stored in `grpcprotobuf.cpu` and `httpjson.cpu`:
+This will create an executable `protobuff-json-benchmark.test` and the profile information will be stored in `protobuffgrpc.cpu` and `jsonhttp.cpu`:
 
 ```
 go test -bench=BenchmarkProtobuffGRPC -cpuprofile=protobuffgrpc.cpu
