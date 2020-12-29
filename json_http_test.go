@@ -25,9 +25,9 @@ func BenchmarkJSONHTTP(b *testing.B) {
 
 func doPost(client *http.Client, b *testing.B) {
 	u := &jsonHttp.User{
-		Email:    "foo@bar.com",
-		Name:     "Bench",
-		Password: "bench",
+		Email:    "mulia.ichsan@gmail.com",
+		Name:     "Mulia Ichsan",
+		Password: "thisispassword00",
 	}
 	buf := new(bytes.Buffer)
 	json.NewEncoder(buf).Encode(u)

@@ -30,9 +30,9 @@ func BenchmarkProtobuffGRPC(b *testing.B) {
 
 func doGRPC(client proto.APIClient, b *testing.B) {
 	resp, err := client.CreateUser(context.Background(), &proto.User{
-		Email:    "foo@bar.com",
-		Name:     "Bench",
-		Password: "bench",
+		Email:    "mulia.ichsan@gmail.com",
+		Name:     "Mulia Ichsan",
+		Password: "thisispassword00",
 	})
 
 	if err != nil {

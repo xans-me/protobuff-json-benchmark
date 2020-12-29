@@ -3,3 +3,4 @@ protobuffgrpc.cpu
 protobuff-json-benchmark.test
 .idea
 .vscode
+protobuff-json-benchmark.test.exe

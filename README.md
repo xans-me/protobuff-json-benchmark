@@ -19,10 +19,10 @@ go test -bench=. -benchmem
 goos: darwin
 goarch: amd64
 pkg: github.com/xans-me/protobuff-json-benchmark
-BenchmarkJSONHTTP-4                 5391            232441 ns/op            9045 B/op        117 allocs/op
-BenchmarkProtobuffGRPC-4            5277            237833 ns/op            9401 B/op        190 allocs/op
+BenchmarkJSONHTTP-12               13203             87254 ns/op            9260 B/op        118 allocs/op
+BenchmarkProtobuffGRPC-12          10000            146531 ns/op            9615 B/op        189 allocs/op
 PASS
-ok      github.com/xans-me/protobuff-json-benchmark     6.567s
+ok      github.com/xans-me/protobuff-json-benchmark     4.924s
 ```
 
 They are almost the same, HTTP+JSON is a bit faster and has less allocs/op.
@@ -39,9 +39,18 @@ go test -bench=BenchmarkJSONHTTP -cpuprofile=jsonhttp.cpu
 Check CPU usage per approach using:
 
 ```
-go tool pprof protobuffgrpc.cpu
-go tool pprof jsonhttp.cpu
+$ go tool pprof protobuffgrpc.cpu
+Type: cpu
+Time: Dec 30, 2020 at 1:47am (+07)
+Duration: 1.81s, Total samples = 2.32s (128.13%)
 ```
 
-My results show that Protobuf consumes less ressources, around **30% less**.
+```
+$ go tool pprof jsonhttp.cpu
+Type: cpu
+Time: Dec 30, 2020 at 1:47am (+07)
+Duration: 2.21s, Total samples = 2.94s (133.02%)
+```
+
+My results show that Protobuf consumes less ressources.
 
